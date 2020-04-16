@@ -14,11 +14,11 @@
 const http= require('http'),
 		path= require('path'),
 		express= require('express'),
-		Routing= require('./rutas.js'),
+	//	Routing= require('./rutas.js'),
 		bodyParser= require('body-parser'),
 		mongoose= require('mongoose');
 
-const PORT = 8082
+const PORT = 3000
       app  = express()
 
 const Server = http.createServer(app);
@@ -28,8 +28,9 @@ const Server = http.createServer(app);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
-app.use(express.static('../client'));
-app.use('/users', Routing);
+//app.use(express.static('../client'));
+app.use(express.static(__dirname + "/../client"));
+// app.use('/users', Routing);
 
 Server.listen(PORT, function(){
 	console.log("Se establecio conexion con el servidor en el puerto: " +PORT);
