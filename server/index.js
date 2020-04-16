@@ -23,7 +23,7 @@ const PORT = 3000
 
 const Server = http.createServer(app);
 
-//mongoose.connect("mongodb://localhost/agendaBD");
+mongoose.connect("mongodb://localhost/agendaBD");
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
