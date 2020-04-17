@@ -9,7 +9,6 @@ let UserSchema= new Schema({
 	estado: {type:String, require:true, enum:['Activo', 'Inactivo']}
 });
 let UserModel = mongoose.model('Usuario', UserSchema);
-UserModel.on('error', (err) => {
-   console.log(err.message)
-});
+
+
 module.exports= UserModel;

@@ -39,15 +39,17 @@ class EventManager {
                 start = start + 'T' + start_hour
                 end = end + 'T' + end_hour
             }
-            let url = this.urlBase + "/new"
+            let url = this.urlBase + "/agregar_evento"
             if (title != "" && start != "") {
                 let ev = {
                     title: title,
                     start: start,
                     end: end
                 }
+
                 $.post(url, ev, (response) => {
                     alert(response)
+                    console.log(ev)
                 })
                 $('.calendario').fullCalendar('renderEvent', ev)
             } else {
