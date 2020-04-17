@@ -8,14 +8,8 @@ let UserSchema= new Schema({
 	contrasenna: {type:String, require:true},
 	estado: {type:String, require:true, enum:['Activo', 'Inactivo']}
 });
-let UserModel= mongoose.model('Usuario', UserSchema);
-
-module.exports= UserSchema;
-//creacion del primer usuario
-var PrimerUser= new UserModel({
-	idUser: 1094267608,
-	nombre: 'Mattias Bylin',
-	email: 'mattiasbylin@hotmail.com',
-	contrasenna: '12345',
-	estado: 'Activo'
+let UserModel = mongoose.model('Usuario', UserSchema);
+UserModel.on('error', (err) => {
+   console.log(err.message)
 });
+module.exports= UserModel;

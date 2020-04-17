@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src https://*; child-src 'none';">
     <title>Inicio de sesión</title>
     <link rel="stylesheet" href="css/styles.css"/>
     <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
@@ -23,9 +22,11 @@
     <script>
         var nombreUsuario = $('#user')
         var pass = $('#pass')
-        $('.loginButton').on('click', function(event) {
+        $('.loginButton').on('click', function() {
             if (nombreUsuario.val() != "" && pass.val() != "") {
-                $.post('/login',{user: nombreUsuario.val(), pass: pass.val()}, function(response) {
+              console.log(nombreUsuario.val() + pass.val())
+                $.post('./users/login',{user: nombreUsuario.val(), pass: pass.val()}, function(response) {
+                  console.log("recibimos info " + response)
                     if (response == "Validado") {
                         window.location.href = "http://localhost:3000/main.html"
                     }

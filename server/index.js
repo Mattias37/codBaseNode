@@ -14,7 +14,7 @@
 const http= require('http'),
 		path= require('path'),
 		express= require('express'),
-	//	Routing= require('./rutas.js'),
+		Routing= require('./rutas.js'),
 		bodyParser= require('body-parser'),
 		mongoose= require('mongoose');
 
@@ -30,7 +30,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 
 //app.use(express.static('../client'));
 app.use(express.static(__dirname + "/../client"));
-// app.use('/users', Routing);
+app.use('/users', Routing);
 
 Server.listen(PORT, function(){
 	console.log("Se establecio conexion con el servidor en el puerto: " +PORT);
