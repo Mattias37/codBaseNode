@@ -1,24 +1,34 @@
 
 const Router = require('express').Router();
 const UserModel = require('./model.js');
+const EventoModel = require('./eventoModel.js')
 
-Router.get('all', function(err, res){
+Router.get('/all', function(err, res){
   // Devolver todos los usuarios del servidor.
-  Users.find({}).exac(function(err,docs){
+  console.log('Llegamos a rutas.js')
+  UserModel.find({}).exec(function(err,docs){
     if (err){
+      console.log("Docs de Users funciona hasta rutas.js")
       res.status(500)
       res.json(err)
-      console.log("Docs de Users funciona hasta rutas.js")
+
     }
     res.json(docs)
     console.log("Docs de Users de rutas.js: "+docs)
   });
 });
-/*
+
 Router.get('/cargar_eventos', function(req, res){
   //retorna eventos guardados.
+  EventoModel.find({},{"_id":0,"title":1,"start":1,"end":1}).exec(function(err,docs){
+		if(err){
+			res.status(500)
+			res.json(err)
+		}
+		res.json(docs)
+	});
 })
-*/
+
 Router.post('/login', function(req, res){
   console.log("hola llegamos a rutas.js")
   /*let Ani = new UserModel({ idUser: 1094267698,nombre: 'Ani Bylin', email:"anibylin@hotmail.com",contrasenna:'12345', estado:'Activo'})
@@ -28,7 +38,7 @@ Router.post('/login', function(req, res){
   })*/
 
   UserModel.find({email:req.body.user, contrasenna:req.body.pass}, function(err,doc){
-    
+
     if(err){
       res.status(500)
       res.json(err)

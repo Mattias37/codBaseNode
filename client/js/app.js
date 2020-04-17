@@ -1,7 +1,7 @@
 
 class EventManager {
     constructor() {
-        this.urlBase = "/events"
+        this.urlBase = "users"
         this.obtenerDataInicial()
         this.inicializarFormulario()
         this.guardarEvento()
@@ -9,6 +9,7 @@ class EventManager {
 
     obtenerDataInicial() {
         let url = this.urlBase + "/all"
+        console.log('obtenerDataInicial')
         $.get(url, (response) => {
             this.inicializarCalendario(response)
         })
@@ -81,6 +82,7 @@ class EventManager {
     }
 
     inicializarCalendario(eventos) {
+      console.log('inicializamos el calendario')
         $('.calendario').fullCalendar({
             header: {
                 left: 'prev,next today',
@@ -97,7 +99,12 @@ class EventManager {
             eventDrop: (event) => {
                 this.actualizarEvento(event)
             },
-            events: eventos,
+            events: {
+              url: 'users/cargar_eventos',
+              error: function() {
+                $('#script-warning').show();
+              }
+            },
             eventDragStart: (event,jsEvent) => {
                 $('.delete').find('img').attr('src', "img/trash-open.png");
                 $('.delete').css('background-color', '#a70f19')
