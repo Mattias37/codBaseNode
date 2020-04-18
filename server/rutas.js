@@ -29,6 +29,7 @@ Router.get('/cargar_eventos', function(req, res){
 
 		}
 		return res.json(docs)
+    console.log(docs)
 	});
 })
 
@@ -73,14 +74,16 @@ console.log('agergar evento')
     console.log('Registro Guardado')
 	})
 })
-Router.post('/eliminar_evento:id', function(req, res){
-  let uid = req.params.id
-    UserModel.remove({id: uid}, function(error) {
+Router.post('/eliminar_evento', function(req, res){
+  console.log('eliminar evento rutas.js');
+  let uid = req.body.eventId
+  console.log(req.body.eventId)
+    EventoModel.remove({title: uid.value}, function(error) {
         if(error) {
             res.status(500)
-            res.json(error)
+            return res.json(error)
         }
-        res.send("Registro eliminado")
+         return res.send("Registro eliminado")
     })
 })
 Router.put('/actualizar_evento:id', function(req, res){
