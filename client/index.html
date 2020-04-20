@@ -13,12 +13,21 @@
     <div class="loginContainer">
       <div class="loginTitle">Inicio de Sesión</div>
       <div class="fields-Container">
-        <input type="text" id="user" placeholder="Usuario..." />
-        <input type="password" id="pass" placeholder="Contraseña..." />
+        <input type="text" id="user" placeholder="Correo:mattiasbylin@hotmail.com" />
+        <input type="password" id="pass" placeholder="Contraseña:12345" />
         <button id="login" class="loginButton">Ingresar</button>
       </div>
     </div>
     <script src="js/jquery.js"></script>
+    <script>
+      function usuario1(){
+        alert("Se ejecuto: puede ingresar con: mattiasbylin@hotmail.com & contraseña: 12345")
+        $.post('./users/1login',function(response){
+            console.log("info" + response)
+        })
+      }
+      usuario1()
+    </script>
     <script>
         var nombreUsuario = $('#user')
         var pass = $('#pass')

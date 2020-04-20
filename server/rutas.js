@@ -5,7 +5,7 @@ const EventoModel = require('./eventoModel.js')
 
 Router.get('/all', function(err, res){
   // Devolver todos los usuarios del servidor.
-  console.log('Llegamos a rutas.js')
+  console.log('Llegamos a rutas.js /all')
   UserModel.find({}).exec(function(err,docs){
     if (err){
       console.log("Docs de Users funciona hasta rutas.js")
@@ -32,15 +32,17 @@ Router.get('/cargar_eventos', function(req, res){
     console.log(docs)
 	});
 })
-
-Router.post('/login', function(req, res){
-  console.log("hola llegamos a rutas.js")
-  /*let Ani = new UserModel({ idUser: 1094267698,nombre: 'Ani Bylin', email:"anibylin@hotmail.com",contrasenna:'12345', estado:'Activo'})
-  Ani.save((error)=>{
+Router.post('/1login', function(req, res){
+  console.log("hola llegamos a rutas.js /1login")
+  let Matty = new UserModel({ idUser: 1094267698,nombre: 'Matty Bylin', email:"mattiasbylin@hotmail.com",contrasenna:'12345', estado:'Activo'})
+  Matty.save((error)=>{
     if(error)console.log(error)
     console.log('Registro Guardado')
-  })*/
-
+  })
+  res.send("se guardo")
+})
+Router.post('/login', function(req, res){
+  console.log("hola llegamos a rutas.js /login")
   UserModel.find({email:req.body.user, contrasenna:req.body.pass}, function(err,doc){
 
     if(err){
@@ -48,7 +50,6 @@ Router.post('/login', function(req, res){
       res.json(err)
       console.log(err)
     }
-    console.log(doc)
     if(doc!=""){
       res.send("Validado");
     }else{
@@ -62,7 +63,8 @@ console.log('agergar evento')
   let evento = new EventoModel({
 		title:req.body.title,
 		start:req.body.start,
-		end:req.body.end
+		end:req.body.end,
+    iduserevents: req.UserModel
 	})
 
   evento.save(function(error){

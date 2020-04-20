@@ -14,6 +14,19 @@ class EventManager {
             this.inicializarCalendario(response)
         })
     }
+    actualizarEvento(evento) {
+        let eventId = {
+            title: evento.body.title,
+            start: evento.body.start,
+            end: evento.body.end
+        }
+        console.log(eventId)
+        $.post('/users/actualizar_evento',  { eventId }, (response) => {
+            alert(response)
+            location.reload();
+
+        })
+    }
 
     eliminarEvento(evento) {
         let eventId = evento.title
@@ -103,6 +116,7 @@ class EventManager {
             timeFormat: 'H:mm',
             eventDrop: (event) => {
                 this.actualizarEvento(event)
+                console.log(event)
             },
             events: {
               url: 'users/cargar_eventos',
