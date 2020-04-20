@@ -63,8 +63,7 @@ console.log('agergar evento')
   let evento = new EventoModel({
 		title:req.body.title,
 		start:req.body.start,
-		end:req.body.end,
-    iduserevents: req.UserModel
+		end:req.body.end
 	})
 
   evento.save(function(error){
@@ -88,18 +87,18 @@ Router.post('/eliminar_evento', function(req, res){
          return res.send("Registro eliminado")
     })
 })
-Router.put('/actualizar_evento:id', function(req, res){
-  let evento=new EventoModel({
-    title:req.body.title,
-		start:req.body.start,
-		end:req.body.end
-	})
-	evento.update(function(error){
+Router.post('/actualizar_evento', function(req, res){
+  console.log("actualizar evento rutas.js")
+  console.log(req.body.title)
+  console.log(req.body.starta)
+  console.log(req.body.enda)
+
+	EventoModel.update({title:req.body.title, start:req.body.starta, end:req.body.enda},function(error){
 		if(error){
 			res.status(500)
-			res.json(error)
+			return res.json(error)
 		}
-		res.send("Registro Guardado")
+		return res.send("Registro Actualizado")
 	})
 })
 

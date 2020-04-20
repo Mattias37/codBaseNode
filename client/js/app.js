@@ -15,13 +15,22 @@ class EventManager {
         })
     }
     actualizarEvento(evento) {
-        let eventId = {
-            title: evento.body.title,
-            start: evento.body.start,
-            end: evento.body.end
-        }
-        console.log(eventId)
-        $.post('/users/actualizar_evento',  { eventId }, (response) => {
+      console.log("vamos a actualizar el evento app.js "+evento)
+        let eventId = evento.title
+        var start = moment(evento.start).format('YYYY-MM-DD HH:mm:00');
+        var end = moment(evento.end).format('YYYY-MM-DD HH:mm:00');
+        /*let ev = {
+            title: evento.title,
+            start: start,
+            end: end
+        }*/
+        let title = evento.title
+        let starta = start
+        let enda = end
+        console.log( title)
+        console.log( starta)
+        console.log( enda)
+        $.post('/users/actualizar_evento', { starta,title, enda} , (response) => {
             alert(response)
             location.reload();
 
@@ -116,7 +125,7 @@ class EventManager {
             timeFormat: 'H:mm',
             eventDrop: (event) => {
                 this.actualizarEvento(event)
-                console.log(event)
+                console.log(event.title)
             },
             events: {
               url: 'users/cargar_eventos',
